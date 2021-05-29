@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"/>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/user.css">
+</head>
+
+<hr>
+<!-- Navigation Bar -->
+<header class="container-fluid">
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-expand-md bg-light navbar-default">
+
+        <div class="navbar-brand" href="{% url 'homepage' %}">
+            Health++
+        </div>
+
+        <ul class="nav navbar-nav">
+            <li class="navbar-item active">
+                <a class="nav-link" href="{% url 'homepage' %}">
+                    Home
+                </a>
+            </li>
+            <!--            <li class="navbar-item">-->
+            <!--                <a class="nav-link" href="#aboutUs">-->
+            <!--                    About Us-->
+            <!--                </a>-->
+            <!--            </li>-->
+            <li class="navbar-item">
+                <a class="nav-link" href="{% url 'bookapt' %}">
+                    Book an Appointment
+                </a>
+            </li>
+            <!--            <li class="navbar-item">-->
+            <!--                <a class="nav-link" href="#services">-->
+            <!--                    Services-->
+            <!--                </a>-->
+            <!--            </li>-->
+        </ul>
+
+        <ul class="nav navbar-nav ml-auto">
+            <li class="navbar-item">
+                <button type="submit" class="btn btn-outline-primary padBtn">
+                    <a class="nav-link" href="{% url 'homepage' %}">
+                        Logout
+                    </a>
+                </button>
+            </li>
+        </ul>
+    </nav>
+</header>
+<br><br><br><br>
+<div class="container text-center">
+    <h1>
+        Welcome User
+    </h1>
+</div>
+<!-- background picture(s) -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="mx-auto d-block">
+            <img src="/static/patient.jpg" id="pjpg" alt="">
+        </div>
+    </div>
+</div>
+<hr>
+<h2 class="text-center">
+    What do you want to do?
+</h2>
+
+
+
+<div class="container " >
+    <div class="text-center" align="center">
+        <button type="submit" class="btn btn-outline-primary btn-lg " style="margin: 27px;" onclick="location.href='{% url 'bookapt' %}'">
+            <!--<a class="nav-light" href="{% url 'bookapt' %}">-->
+                Book Appoinment
+            {% comment %} </a> {% endcomment %}
+        </button>
+        <button type="submit" class="btn btn-outline-primary btn-lg" style="margin-left: auto; margin-right: auto;" href="{% url 'bookapt' %}">
+            Medical History
+        </button>
+    </div>
+<!--    <div class="text-center" align="center">-->
+<!--        <button type="submit" class="btn btn-outline-primary btn-lg" style="margin: 30px">-->
+<!--            Admit Form-->
+<!--        </button>-->
+<!--        <button type="submit" class="btn btn-outline-primary btn-lg" style="margin-left: auto; margin-right: auto">-->
+<!--            Discharge Form-->
+<!--        </button>-->
+<!--    </div>-->
+
+</div>
+</hr>
+<!-- Footer -->
+<footer class="page-footer">
+    <div class="container-fluid bg-light">
+
+        <div class="d-flex flex-column">
+
+            <div class="p-2">
+
+                <div class="row">
+
+                    <div class="col-md-5">
+                        <div class="contact">
+                            <div class="d-flex flex-column">
+
+                                <div class="p-1 footerHeading">
+                                    Contact us
+                                </div>
+                                <div class="p-1">
+                                    +92-317 0317 654
+                                </div>
+                                <div class="p-1">
+                                    companyname@hostname.com
+                                </div>
+                                <div class="p-1">
+
+                                    <button type="button"
+                                            class="btn btn-social-icon btn-facebook btn-rounded socialBtn">
+                                        <i class="fa fa-facebook fa-lg"></i>
+                                    </button>
+
+                                    <button type="button" class="btn btn-social-icon btn-twitter btn-rounded socialBtn">
+                                        <i class="fa fa-twitter fa-lg"></i>
+                                    </button>
+
+                                    <button type="button"
+                                            class="btn btn-social-icon btn-linkedin btn-rounded socialBtn">
+                                        <i class="fa fa-linkedin fa-lg"></i>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="d-flex flex-column">
+
+                            <div class="p-1 footerHeading">
+                                Address
+                            </div>
+                            <div class="p-1">
+                                <address>
+                                    Road Name, District <br>
+                                    Sector # <br>
+                                    City Name Zip Code<br>
+                                    Country
+                                </address>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <figure>
+                            <img src="/static/logo_transparent.png" id="logo" alt="logo of company">
+                        </figure>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="p-1">
+                    <span class="copyright">
+                        Copyright company <i class="fa fa-copyright" aria-hidden="true"></i>
+                        2020. All Rights Reserved
+                    </span>
+            </div>
+
+        </div>
+
+    </div>
+</footer>
+
+
+
+</body>
+</html>

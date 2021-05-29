@@ -1,0 +1,57 @@
+body {
+    padding-top: 55px;
+}
+
+#noLogin {
+    display: none;
+}
+
+#login {
+    font-size: 1.5 m;
+    font-style: normal;
+}
+
+.formBookApnt {
+    margin-top: 60px;
+    margin-left: 10%;
+    width: 80%;
+    background-color: rgb(250, 250, 250);
+}
+
+.headingBook {
+    font-size: 2em;
+    font-style: normal;
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: black;
+}
+
+
+.footerHeading {
+    font-size: 28px;
+    font-family: 'Lucida Sans Lucida Sans Regular Lucida Grande Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding-bottom: 2em;
+
+}
+#book.btn.apt{
+    color: rgb(251, 251, 251);
+}
+
+.copyright {
+    font-size: 15px;
+    font-family: 'Gill Sans Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding-left: 40%;
+}
+
+.socialBtn {
+    width: 50px;
+    height: 50px;
+}
+
+#hidden_div {
+    display: none;
+}
+
+#hidden_div2 {
+    display: none;
+}

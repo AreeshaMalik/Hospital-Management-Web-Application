@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookings</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/BookAppointment.css">
+</head>
+
+<script type="text/javascript">
+    function enableOthers(divId, element) {
+        document.getElementById(divId).style.display = element.value == 1 ? 'none' : 'block';
+        var dept = $('#dpt').val();
+        // var data=
+        $.ajax({
+            type: "GET",
+            url: "getDept",
+            data: { dept: dept },
+            success: function (data) {
+                alert("dept transmitted");
+            }
+        });
+
+        var doc = $('#doc').val();
+        // var data=
+        $.ajax({
+            type: "GET",
+            url: "getDoc",
+            data: { doc: doc },
+            success: function (data) {
+                alert("doc transmitted");
+            }
+        });
+    };
+</script> 
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header class="container-fluid">
+
+        <nav class="navbar fixed-top navbar-expand-lg navbar-expand-md bg-light navbar-default">
+
+            <div class="navbar-brand">
+                Health++
+            </div>
+
+            <ul class="nav navbar-nav">
+                <li class="navbar-item active">
+                    <a class="nav-link" href="{% url 'homepage' %}">
+                        Home
+                    </a>
+                </li>
+                {% comment %} <li class="navbar-item">
+                    <a class="nav-link" href="index.html">
+                        About Us
+                    </a>
+                </li>
+                <li class="navbar-item">
+                    <a class="nav-link" href="BookAppointment.html">
+                        Book an Appointment
+                    </a>
+                </li>
+                <li class="navbar-item">
+                    <a class="nav-link" href="index.html">
+                        Services
+                    </a>
+                </li>{% endcomment %}
+            </ul>
+
+            <ul class="nav navbar-nav ml-auto" id="noLogin">
+                <!--<li class="navbar-item">
+                <button type="submit" class="btn btn-outline-primary padBtn">
+                    User Login
+                </button>
+            </li>
+            <li class="navbar-item">
+                <button type="submit" class="btn btn-outline-primary">
+                    Employee Login
+                </button> 
+            </li>-->
+            </ul>
+
+            <ul class="nav navbar-nav ml-auto" id="login">
+                {% comment %} <li class=".navbar-text loginText">
+
+                    <span>Hello</span>
+                    <span id="username">
+                        <b>*Insert username here*</b>
+                    </span>
+
+                </li> {% endcomment %}
+            </ul>
+
+        </nav>
+
+    </header>
+
+    <main>
+        <!-- Form for booking appointment -->
+        <article class="container formBookApnt">
+
+            <div class="headingBook">
+                Book an Appointment
+            </div>
+            <form action="{% url 'bookapt' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="FirstName">First Name:</label>
+                        <input type="text" class="form-control" id="FirstName" placeholder="First Name" name="FirstName">
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="LastName">Last Name:</label>
+                        <input type="text" class="form-control" id="LastName" placeholder="Last Name" name="LastName">
+                    </div>
+                    <div class="form-group col">
+                    <label for="sex">Sex</label>
+                    <select name="sex" class="form-control" id="sex">
+                        <option value="" selected disabled>-</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                </div>
+
+                <!-- </div> -->
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" id="email" name="email" placeholder="Email">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="mobile">Mobile Number</label>
+                        <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile Number">
+                        <!-- pattern="[0-9]{4}-[0-9]{7}"-->
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+
+                        <label for="CNIC">CNIC</label>
+                        <input type="text" class="form-control" id="CNIC" maxlength="13" name="CNIC" placeholder="CNIC">
+
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+
+                        <label for="dept">Department</label>
+                        <select class="form-control" id="dpt" onchange="javascript:enableOthers('hidden_div', this);"
+                            name="dept" id="dept">
+                            <option value="" selected disabled>Please select</option>
+                            <option>ENT</option>
+                            <option>Cardiology</option>
+                            <option>Neurology</option>
+                            <option>Gynecology</option>
+                        </select>
+
+                    </div>
+                    <div id="hidden_div" class="form-group col-md-6">
+                        <label for="doc">Doctors</label>
+                        <select class="form-control" id="doc" name="doc"
+                            onchange="javascript:enableOthers('hidden_div2', this);">
+                            <option value="" selected disabled>Please select</option>
+                            <option>Dr. Mazher</option>
+                            <option>Dr. Sajjad</option>
+                            <option>Dr. Amna</option>
+                            <option>Dr. Ijaz</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+
+                        <label for="Date">Date</label>
+                        <input type="date" class="form-control" id="Date" name="Date">
+
+                    </div>
+
+                    <div class="form-group col-md-6" id="hidden_div2">
+
+                        <label for="Time">Available Slots</label>
+                        <select class="form-control" id="Time" name="Time">
+                            <option value="" selected disabled>-</option>
+                            <option>9:00</option>
+                            <option>9:15</option>
+                            <option>9:30</option>
+                            <option>17:00</option>
+                            <option>17:45</option>
+                        </select>
+                    </div> 
+
+                </div>
+
+                <!-- {% for field in form %} -->
+                <!-- <div class="form-group col-md-5">
+                        <label for="{{ field.id_for_label}}" class="label">{{field.html_name}}</label>
+                    </div> -->
+                <!-- <div class="form-group col-md-5">
+                        {{field}}
+                    </div> -->
+                <!-- {% endfor %}-->
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-md btn-primary mt-4 mb-2">
+                        Book Appoinment
+                    </button>
+                </div>
+
+            </form>
+        </article>
+    </main>
+    <footer class="page-footer shadow-sm rounded mt-4">
+        <div class="container-fluid bg-light">
+
+            <div class="d-flex flex-column">
+
+                <div class="p-2">
+
+                    <div class="row">
+
+                        <div class="col-md-5">
+                            <div class="contact">
+                                <div class="d-flex flex-column">
+
+                                    <div class="p-1 footerHeading">
+                                        Contact us
+                                    </div>
+                                    <div class="p-1">
+                                        +92-317 0317 654
+                                    </div>
+                                    <div class="p-1">
+                                        companyname@hostname.com
+                                    </div>
+                                    <div class="p-1">
+
+                                        <button type="button"
+                                            class="btn btn-social-icon btn-facebook btn-rounded socialBtn">
+                                            <i class="fa fa-facebook fa-lg"></i>
+                                        </button>
+
+                                        <button type="button"
+                                            class="btn btn-social-icon btn-twitter btn-rounded socialBtn">
+                                            <i class="fa fa-twitter fa-lg"></i>
+                                        </button>
+
+                                        <button type="button"
+                                            class="btn btn-social-icon btn-linkedin btn-rounded socialBtn">
+                                            <i class="fa fa-linkedin fa-lg"></i>
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="d-flex flex-column">
+
+                                <div class="p-1 footerHeading">
+                                    Address
+                                </div>
+                                <div class="p-1">
+                                    <address>
+                                        Road Name, District <br>
+                                        Sector # <br>
+                                        City Name Zip Code<br>
+                                        Country
+                                    </address>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <figure>
+
+                            </figure>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="p-1">
+                    <span class="copyright">
+                        Copyright company <i class="fa fa-copyright" aria-hidden="true"></i>
+                        2020. All Rights Reserved
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+
+</html>

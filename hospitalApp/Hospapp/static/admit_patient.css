@@ -1,0 +1,84 @@
+body {
+    background: rgb(214, 214, 214);
+}
+
+#admitBlock {
+    position: relative;
+    height: 700px;
+    width: 70%;
+    background: rgb(245,245,245);
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 50px;
+    border: 1px solid black;
+}
+
+.headingAdmit {
+    height: 50px;
+    font-size: 36px;
+    font-weight: 200px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    align-items: center;
+    padding-left: 35%;
+    padding-top: 0.5%;
+    margin-top: 30px;
+    border-bottom: 1px solid rgb(41, 41, 41);
+    margin-bottom: 25px;
+}
+
+.labelCNIC {
+    margin-left: 70px;
+    margin-top: 5px;
+    font-size: 19px;
+    align-content: center;
+    font-weight: bold;
+}
+
+.appointments {
+    margin-top: 45px;
+    margin-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 5px;
+}
+
+.row.top {
+    margin-bottom: 40px;
+    border-bottom: 1px solid rgb(41, 41, 41);
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.aptDet {
+    height: 60px;
+    font-size: 19px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    align-content: center;
+    background: rgb(245, 245, 245);
+    /* border: 1px red solid; */
+}
+
+.aptDet.ward {
+    margin-left: 50px;
+    margin-top: 1px;
+}
+
+.aptDet.top {
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.btnSubmit {
+    margin-left: 425px;
+    margin-top: -18px;
+}
+
+#invalidCNIC {
+    margin-left: 55px;
+    font-size: 15px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: red
+}

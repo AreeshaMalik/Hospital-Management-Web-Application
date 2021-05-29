@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CheckUp Form</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"/>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="checkUp.css">
+    <script src="checkUp.js"></script>
+
+</head>
+<!-- Navigation Bar -->
+<header class="container-fluid">
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-expand-md bg-light navbar-default">
+
+        <div class="navbar-brand">
+            Health++
+        </div>
+
+        <ul class="nav navbar-nav">
+            <li class="navbar-item active">
+                <a class="nav-link" href="index.html">
+                    Home
+                </a>
+            </li>
+            <li class="navbar-item">
+                <a class="nav-link" href="index.html">
+                    About Us
+                </a>
+            </li>
+            <li class="navbar-item">
+                <a class="nav-link" href="BookAppointment.html">
+                    Book an Appointment
+                </a>
+            </li>
+            <li class="navbar-item">
+                <a class="nav-link" href="index.html">
+                    Services
+                </a>
+            </li>
+        </ul>
+
+<!--        <ul class="nav navbar-nav ml-auto" id="noLogin">-->
+<!--            <li class="navbar-item">-->
+<!--                <button type="submit" class="btn btn-outline-primary padBtn">-->
+<!--                    User Login-->
+<!--                </button>-->
+<!--            </li>-->
+<!--            <li class="navbar-item">-->
+<!--                <button type="submit" class="btn btn-outline-primary">-->
+<!--                    Employee Login-->
+<!--                </button>-->
+<!--            </li>-->
+<!--        </ul>-->
+        <ul class="nav navbar-nav ml-auto" id="login">
+            <li class=".navbar-text loginText">
+                <span>Hello</span>
+                <span id="username">
+                        <b>Doctor</b>
+                </span>
+            </li>
+        </ul>
+
+    </nav>
+
+</header>
+
+<!--Patient Details-->
+<article class="cotainer formDetails">
+<!--    <form action="{% url 'checkUp'%}" method="POST">-->
+<!--         {% csrf_token %}-->
+<!--        <div class="form-row">-->
+<!--    <div class="headingCheck form-group col-md-10" align="center">-->
+<!--      <h2> Patient CheckUp Form</h2>-->
+<!--    </div>-->
+<!--    <div class="form-group col-md-2">-->
+<!--            <input type="button" class="btn btn-lg btn-primary ml-4 float-right" onClick="location.href='doctor.html'" value="close">-->
+
+<!--    </div></div>-->
+<!--    </form>-->
+  <!----first row---->
+        <form action="{% url 'checkUp'%}" method="POST">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-5">
+                <label for="fName">First Name:</label>
+                <input type="text" class="form-control" id="fName" name="fName" placeholder="First Name">
+        </div>
+            <div class="form-group col-md-5">
+                <label for="lName">Last Name:</label>
+                <input type="text" class="form-control" id="lName" name="lName" placeholder="Last Name">
+            </div>
+
+        </div>
+<!--            &lt;!&ndash;second row&ndash;&gt;-->
+<!--            <div class="form-row ">-->
+<!--                <div class="form-group col-md-5">-->
+<!--                    <label for="date">Date:</label>-->
+<!--                    <input type="date" class="form-control" id="date" name="date" placeholder="dd/mm/yyy">-->
+<!--                </div>-->
+<!--                <div class="form-group col-md-5">-->
+<!--                    <label for="time">Time:</label>-->
+<!--                    <input type="time" class="form-control" id="time" name="time" placeholder="09:30">-->
+<!--                </div>-->
+<!--            </div>-->
+
+        <!----third row---->
+        <div class="form row">
+            <!--Button for submit-->
+            <div class="text-center form-group col-md-10">
+                 <button type="submit" class="btn btn-md btn-primary mt-4 mb-2">
+                        Enter
+                    </button>
+<!--                <a href= "{% url 'checkUp' % } " >-->
+<!--                <input type="button" class="buttonMH btn btn-md btn-primary mt-3 mb-2" value="Enter" id="enter" name="enter" alt="" onclick="dataAlert()">-->
+<!--                </a>-->
+            </div>
+            <!--button for Medical history-->
+            <div class="text-center">
+                <input type="button" class="buttonMH btn btn-md btn-primary mt-3 mb-2" value="Medical History">
+        </div>
+        </div>
+    </form>
+</article>
+
+<!------Form for Check Up--------->
+<!--<article class="container formDiagnosis">-->
+<!--<form action="diagnosis" method="GET" >-->
+<!--            &lt;!&ndash;-Diagnosis Part&ndash;&gt;-->
+<!--    <div class="form-row">-->
+<!--    <div class="form-group col-md-2">-->
+<!--        <h4>Diagnosis</h4>-->
+<!--    </div>-->
+<!--        <div class="form-group col-md-8">-->
+<!--            <input type="text" id="textboxid" class="form-control" name="diag" placeholder="Type Here">-->
+<!--        </div>-->
+<!--        <div class="form-group col-md-2">-->
+<!--            <input type="button"  class="btn btn-lg btn-primary float-right"  value="save" onclick="showAlert()" id="myForm">-->
+<!--        </div>-->
+<!--&lt;!&ndash;        <div class="form-group ">&ndash;&gt;-->
+<!--&lt;!&ndash;            <textarea type = "text"&ndash;&gt;-->
+<!--&lt;!&ndash;                   id = "myText"&ndash;&gt;-->
+<!--&lt;!&ndash;                   value = "text here"&ndash;&gt;-->
+<!--&lt;!&ndash;                      rows="6"&ndash;&gt;-->
+<!--&lt;!&ndash;                      cols="95">&ndash;&gt;-->
+<!--&lt;!&ndash;            </textarea>&ndash;&gt;-->
+<!--&lt;!&ndash;        <p>*Enter disgnosis here*</p>&ndash;&gt;-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</form>-->
+<!--</article>-->
+<!--    &lt;!&ndash;Prescription Part&ndash;&gt;-->
+<!--<article class="container formPrescription" id="pres">-->
+<!--    <div class="form-row">-->
+<!--        <div class="form-group col-md-2">-->
+<!--            <h4>Prescription</h4>-->
+<!--        </div>-->
+<!--        <form action="pres" method="GET">-->
+<!--            <div class="form-group col-md-9">-->
+<!--                    &lt;!&ndash; <p>*Enter dosage here*</p> &ndash;&gt;-->
+<!--                    <div class="container">-->
+<!--                        <table id="myTable" class=" table order-list">-->
+<!--                        <thead>-->
+<!--                            <tr>-->
+<!--                                <td>Medicine</td>-->
+<!--                                <td>Dosage</td>-->
+<!--                                <td>Description</td>-->
+<!--                            </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                            <tr>-->
+<!--                                <td class="form-group col-sm-4 col-md-4">-->
+<!--                                    <input type="text" name="medicine" class="form-control" />-->
+<!--                                </td>-->
+<!--                                <td class="form-group col-sm-4 col-md-4">-->
+<!--                                    <input type="mail" name="dosage"  class="form-control"/>-->
+<!--                                </td>-->
+<!--                                <td class="form-group col-sm-3 col-md-4">-->
+<!--                                    <input type="text" name="description"  class="form-control"/>-->
+<!--                                </td>-->
+<!--                                <td class=" form-group col-sm-2"><a class="deleteRow"></a>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                        </tbody>-->
+<!--                        <tfoot>-->
+<!--                            <tr>-->
+<!--                                <td colspan="3" style="text-align: center;">-->
+<!--                                    <input type="button" class="btn btn-lg btn-block " id="addrow" value="Add Row" />-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                            </tr>-->
+<!--                        </tfoot>-->
+<!--                    </table>-->
+<!--                    </div>-->
+<!--            </div>-->
+<!--        </form>-->
+<!--    </div>-->
+
+<!--    <div class="form-group col-md-12">-->
+<!--        <a href="checkUp.html">-->
+<!--        <input type="submit" class="btn btn-lg btn-primary ml-4 float-right"  value="save">-->
+<!--        </a>-->
+<!--    </div>-->
+
+<!--    </form>-->
+<!--</article>-->
+
+<!--Admit Patient Part-->
+<!-- <article class="FormAdmit">
+    <form>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <h4>Admit Patient: </h4>
+            </div>
+        </div>
+    </form>
+  </article> -->
+  <!---Footers-->
+  <footer class="page-footer shadow-sm rounded mt-4">
+    <div class="container-fluid bg-light">
+
+        <div class="d-flex flex-column">
+
+            <div class="p-2">
+
+                <div class="row">
+
+                    <div class="col-md-5">
+                        <div class="contact">
+                            <div class="d-flex flex-column">
+
+                                <div class="p-1 footerHeading">
+                                    Contact us
+                                </div>
+                                <div class="p-1">
+                                    +92-317 0317 654
+                                </div>
+                                <div class="p-1">
+                                    companyname@hostname.com
+                                </div>
+                                <div class="p-1">
+
+                                    <!-- <button type="button"
+                                            class="btn btn-social-icon btn-facebook btn-rounded socialBtn">
+                                        <i class="fa fa-facebook fa-lg"></i>
+                                    </button>
+
+                                    <button type="button" class="btn btn-social-icon btn-twitter btn-rounded socialBtn">
+                                        <i class="fa fa-twitter fa-lg"></i>
+                                    </button>
+
+                                    <button type="button"
+                                            class="btn btn-social-icon btn-linkedin btn-rounded socialBtn">
+                                        <i class="fa fa-linkedin fa-lg"></i>
+                                    </button> -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="d-flex flex-column">
+
+                            <div class="p-1 footerHeading">
+                                Address
+                            </div>
+                            <div class="p-1">
+                                <address>
+                                    Road Name, District <br>
+                                    Sector # <br>
+                                    City Name Zip Code<br>
+                                    Country
+                                </address>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+  </footer>
+    </html>
+

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Admission Form</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"/>
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="/static/admit_patient.css">
+
+</head>
+<body>
+
+    <div id="admitBlock">
+
+        <!--  Heading   -->
+        <div class="headingAdmit">
+            Admit Patient Form
+        </div>
+
+        <!--  Search Patient with CNIC -->
+        <form action="{% url 'admit_patient' %}" method="post">
+            {% csrf_token %}
+
+            <div class="row mb-3">
+                <label for="patientCNIC" class="form-label labelCNIC">Patient CNIC</label>
+
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="patientCNIC" name="patientCNIC" aria-describedby="invalidCNIC">
+                </div>
+                <div class="sol-sm-4">
+                    <input type="submit" value="Search" name="Search"
+                        class="btn btn-primary" role="button">
+                </div>
+
+            </div>
+            <div id="invalidCNIC" class="form-text">*Please enter correct CNIC.</div>
+            <script type="text/javascript">
+                var patient = "{{patientFirstName}}"
+                if(patient === "-")
+                {
+                    document.getElementById("invalidCNIC").style.display = "Block";
+                    document.getElementById("admitBlock").style.height = "700px";
+                }
+                else
+                {
+                    document.getElementById("invalidCNIC").style.display = "None";
+                    document.getElementById("admitBlock").style.height = "670px";
+                }
+                
+            </script> 
+
+        </form>
+
+        <div class = "">
+
+        </div>
+
+        <!--  Extract Patient Details  -->
+        <div class="appointments">
+            <div class="row top">
+
+                <div class="col-lg-2">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            First Name
+                        </div>
+                        <div class="aptDet">
+                            {{ patientFirstName }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Last Name
+                        </div>
+                        <div class="aptDet">
+                            {{ patientLastName }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Sex
+                        </div>
+                        <div class="aptDet">
+                            {{ patientSex }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            CNIC
+                        </div>
+                        <div class="aptDet">
+                            {{ patientCNIC }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Contact Number
+                        </div>
+                        <div class="aptDet">
+                            {{ patientContact }}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row top">
+
+                <div class="col-lg-3">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Email
+                        </div>
+                        <div class="aptDet">
+                            {{ patientEmail }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Admission date
+                        </div>
+                        <div class="aptDet">
+                            {{ admissionDate }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Admission Time
+                        </div>
+                        <div class="aptDet">
+                            {{ admissionTime }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Doctor Name
+                        </div>
+                        <div class="aptDet">
+                            {{ doc_name }}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!--    Ward No     -->
+            <div class="row top">
+                <div class="aptDet top">
+                    Allocated Ward No
+                </div>
+                <div class="aptDet ward">
+                    {{ wardNo }}
+                </div>
+            </div>
+
+            <div class="row">
+
+            <form method="POST" action="{% url 'receptionist' %}">
+                {% csrf_token %}
+                <input type="submit" value="Admit Patient" name="Admit Patient"
+                        class="btn-lg btn-primary btnSubmit" role="button">
+            </form>
+
+            </div>
+
+           </div>
+
+    </div>
+
+</body>
+</html>

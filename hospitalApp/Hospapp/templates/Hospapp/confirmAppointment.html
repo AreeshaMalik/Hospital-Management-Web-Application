@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="/static/confirmAppointment.css">
+
+{% if title %}
+    <title>{{title}}</title>
+{% else %}
+    <title>No title found</title>
+{% endif %}
+</head>
+<body>
+
+<div class="container-fluid">
+
+<div class="container">
+    <div class="heading">
+        Booked Appointments
+    </div>
+
+    {% for key,value in appointments.items %}
+
+        <form action="{% url 'aptConfirmation' %}" method="POST">
+            {% csrf_token %}
+
+        <div class="appointments">
+            <div class="row top">
+
+                <div class="col-lg-2">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            First Name
+                        </div>
+                        <div class="aptDet">
+
+                            <label for="FirstName">{{ value.FirstName }}</label>
+                            <input type = "hidden" name = "FirstName" value = "{{ value.FirstName }}"
+                                    id="FirstName"/>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Last Name
+                        </div>
+                        <div class="aptDet">
+
+                            <label for="LastName">{{ value.LastName }}</label>
+                            <input type = "hidden" name = "LastName" value = "{{ value.LastName }}"
+                                    id="LastName"/>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Sex
+                        </div>
+                        <div class="aptDet">
+
+                            <label for="sex">{{ value.sex }}</label>
+                            <input type = "hidden" name = "sex" value = "{{ value.sex }}"
+                                    id="sex"/>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            CNIC
+                        </div>
+                        <div class="aptDet">
+
+                            <label for="CNIC">{{ value.CNIC }}</label>
+                            <input type = "hidden" name = "CNIC" value = "{{ value.CNIC }}"
+                                    id="CNIC"/>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Contact Number
+                        </div>
+                        <div class="aptDet">
+
+                            <label for="mobile">{{ value.mobile }}</label>
+                            <input type = "hidden" name = "mobile" value = "{{ value.mobile }}"
+                                    id="mobile"/>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row top">
+
+                <div class="col-lg-4">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Email
+                        </div>
+                        <div class="aptDet">
+
+                            <label for="email">{{ value.email }}</label>
+                            <input type = "hidden" name = "email" value = "{{ value.email }}"
+                                    id="email"/>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Apt Date
+                        </div>
+                        <div class="aptDet">
+
+                            <label for="date">{{ value.Date }}</label>
+                            <input type = "hidden" name = "date" value = "{{ value.Date }}"
+                                    id="date"/>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Apt Time
+                        </div>
+                        <div class="aptDet">
+
+                            <label for="Time">{{ value.Time }}</label>
+                            <input type = "hidden" name = "Time" value = "{{ value.Time }}"
+                                    id="Time"/>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Doctor Name
+                        </div>
+                        <div class="aptDet">
+
+                            <label for="doctor">{{ value.doctor }}</label>
+                            <input type = "hidden" name = "doctor" value = "{{ value.doctor }}"
+                                    id="doctor"/>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Department
+                        </div>
+                        <div class="aptDet">
+
+                            <label for="department">{{ value.department }}</label>
+                            <input type = "hidden" name = "department" value = "{{ value.department }}"
+                                    id="department"/>
+                            
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+
+                <div class="col-lg-12 btnSubmit">
+                    <input type="submit" value="Confirm Appointment" name="Confirm Appointment"
+                            class="btn btn-primary" role="button">
+                </div>
+
+            </div>
+
+            </div>
+
+        </form>
+
+
+    {% endfor %}
+
+</div>
+
+</div>
+
+<!-- Footer comes here-->
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
+

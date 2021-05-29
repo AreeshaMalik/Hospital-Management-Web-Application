@@ -1,0 +1,69 @@
+#recep{
+    width: 100%;
+    height: 450px;
+}
+
+.footerClass {
+    border-top: 0.5px solid lightslategray;
+}
+
+.footerHeading {
+    font-size: 28px;
+    font-family: 'Lucida Sans Lucida Sans Regular Lucida Grande Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding-bottom: 2em;
+
+}
+
+.copyright {
+    font-size: 15px;
+    font-family: 'Gill Sans Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding-left: 40%;
+}
+
+.socialBtn {
+    width: 50px;
+    height: 50px;
+}
+#doc {
+    height: 170px;
+    align-content: center;
+    padding-left: 40%;
+}
+
+#hidden_div {
+    display: none;
+}
+
+#logo {
+    width: 220px;
+    height: 220px;
+}
+
+#covid {
+    width: 100%;
+    height: 550px;
+}
+
+#logoTop {
+    padding-left: 20%;
+    width: 70%;
+    height: 200px;
+}
+/*#tab{*/
+/*    margin-left: 15%;*/
+/*    margin-right: 70%;*/
+/*    width: 100%;*/
+/*    border: 1px;*/
+/*}*/
+
+/*div.container{*/
+/*    width: 98%;*/
+/*    margin: 1%;*/
+/*}*/
+/*#tab{*/
+/*    !*text-align: center;*!*/
+/*    margin-left: auto;*/
+/*    margin-right: auto;*/
+/*    width: 100px;*/
+/*}*/
+
