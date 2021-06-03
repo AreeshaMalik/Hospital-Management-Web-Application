@@ -330,12 +330,14 @@ def start_checkup(request):
             patientSex = form.cleaned_data["sex"]
             appointment_date = form.cleaned_data["Date"]
             appointment_time = form.cleaned_data["Time"]
+            patientCNIC= form.cleaned_data["CNIC"]
 
             request.session['FirstName'] = patientFirstName
             request.session['LastName'] = patientLastName
             request.session['sex'] = patientSex
             request.session['Date'] = appointment_date
             request.session['Time'] = appointment_time
+            request.session['CNIC'] = patientCNIC
 
         else:
             print("Form not valid\n")
@@ -350,6 +352,7 @@ def start_checkup(request):
     patientSex = request.session['sex']
     appointment_date = request.session['Date']
     appointment_time = request.session['Time']
+    patientCNIC = request.session['CNIC']
 
     print('\n')
     print(patientFirstName)
@@ -357,6 +360,7 @@ def start_checkup(request):
     print(patientSex)
     print(appointment_date)
     print(appointment_time)
+    print(patientCNIC)
     print('\n')
 
     patient_details = dict()
@@ -365,5 +369,47 @@ def start_checkup(request):
     patient_details['sex'] = patientSex
     patient_details['Date'] = appointment_date
     patient_details['Time'] = appointment_time
+    patient_details['CNIC'] = patientCNIC
+
 
     return render(request, 'Hospapp/checkup_new.html', patient_details)
+
+
+def Diagnose(request):
+    # print("\n in diagnosis\n")
+    if request.method == "POST":
+        form = Diagnosis(request.POST)
+
+        # print("\n diagnosis is valid\n")
+        if form.is_valid():
+            # print("\n is valid\n")
+            diagnosis_box = form.cleaned_data["diagnosis_box"]
+            print("\ndiagnosis entered\n", diagnosis_box)
+        else:
+            print("form not valid")
+    else:
+        form = Diagnosis()
+
+    template = loader.get_template("Hospapp/checkup_new.html")
+    return HttpResponse(template.render({"form": form}, request))
+
+
+def Prescribe_Medicine(request):
+    # print("\n in Medicine\n")
+    if request.method == "POST":
+        form = Meds(request.POST)
+
+        # print("\n prescribe medicine\n")
+        if form.is_valid():
+            # print("\n is valid\n")
+            medicine = form.cleaned_data["medicine"]
+            description = form.cleaned_data["description"]
+            dosage = form.cleaned_data["dosage"]
+            print("\nprescription entered\n", medicine, dosage, description)
+        else:
+            print("form not valid")
+    else:
+        form = Meds()
+
+    template = loader.get_template("Hospapp/checkup_new.html")
+    return HttpResponse(template.render({"form": form}, request))

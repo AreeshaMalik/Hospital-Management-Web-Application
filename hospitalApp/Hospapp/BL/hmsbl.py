@@ -110,3 +110,5 @@ def getconfirmbookings():
 def makeupdate(mobile):
     dbconnection("adding",mobile)
     print("bl: Added in already created document \n")
+
+# def addcheckup(firstname,lastname,sex,)

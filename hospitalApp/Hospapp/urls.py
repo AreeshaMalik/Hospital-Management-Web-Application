@@ -19,4 +19,6 @@ urlpatterns = [
     # path('delete',views.confirmBooking,name='delete'),
     path('listAllAppointments', views.listAllAppointments, name='listAllAppointments'),
     path('startCheckUp', views.start_checkup, name='startCheckUp'),
+    path('Diagnosis', views.Diagnose, name='Diagnosis'),
+    path('Prescribe_Medicine', views.Prescribe_Medicine, name='Prescription'),
 ]

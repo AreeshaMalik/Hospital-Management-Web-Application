@@ -23,6 +23,15 @@ class startCheckUp(forms.Form):
     sex = forms.CharField(widget=forms.TextInput(attrs={'class': 'input'}))
     Date = forms.CharField(widget=forms.TextInput(attrs={'class': 'input'}))
     Time = forms.CharField(widget=forms.TextInput(attrs={'class': 'input'}))
+    CNIC = forms.CharField(widget=forms.TextInput(attrs={'class': 'input'}))
+
+class Diagnosis(forms.Form):
+    diagnosis_box = forms.CharField(widget=forms.TextInput(attrs={'class': 'input'}))
+
+class Meds(forms.Form):
+    medicine = forms.CharField(widget=forms.TextInput(attrs={'class': 'input'}))
+    description = forms.CharField(widget=forms.TextInput(attrs={'class': 'input'}))
+    dosage = forms.CharField(widget=forms.TextInput(attrs={'class': 'input'}))
 
 class Register(forms.Form):
     fName=forms.CharField(widget=forms.TextInput(attrs={'class':'input'}))

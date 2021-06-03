@@ -73,6 +73,18 @@
             </div>
 
             <div class="row top">
+                <div class="col-lg-4">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            CNIC
+                        </div>
+                        <div class="aptDet">
+                            {% for x in CNIC %}
+                                {{x}}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
 
                 <div class="col-lg-4">
                     <div class="flex-container">
@@ -132,7 +144,7 @@
 
                 <div id="diagnosis" class="tab-pane fade in active">
 
-                      <form action="" method="post">
+                      <form action="{% url 'Diagnosis'%}" method="post">
                           {% csrf_token %}
 
                           <div class="flex-container">
@@ -170,7 +182,7 @@
                 </div>
 
                 <div id="pres" class="tab-pane fade in active">
-                     <form action="" method="post">
+                     <form action="{% url 'Prescription'%}" method="post">
                          {% csrf_token %}
 
                          <div class="row">
