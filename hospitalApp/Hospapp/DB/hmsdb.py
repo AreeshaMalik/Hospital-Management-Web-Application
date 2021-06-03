@@ -18,11 +18,15 @@ def dbconnection(actor,check):
     Discharge = db["Discharge Patients"]
     Dischargelist = Discharge.count()
 
+
     samplelist = list()
     samplebooked = list()
     sampleadmit = list()
     sampleconfirm = list()
     sample_discharge = list()
+
+    updt = db['CheckUpdate']
+    uplist = updt.count()
 
     if (actor == "Receptionist"):
         samplelist.append(Register)
@@ -74,6 +78,18 @@ def dbconnection(actor,check):
         sample_discharge.append(Discharge)
         sample_discharge.append(Dischargelist)
         return sample_discharge
+    
+    elif actor == "confirmedapt":
+        getdict = dict()
+        a = 0
+        for data in Confirmed.find():
+            getdict[a] = data
+            a = a + 1
+        return getdict
+    
+    elif actor == "adding":
+        updt.update({"name" :"Areesha" },{"$set":{"mobile":check}})
+        print("db: updated \n")
 
     elif (actor == "deleteall"):
         Register.delete_many()

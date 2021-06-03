@@ -101,3 +101,12 @@ def dischargepatient(CNIC):
         "CNIC": CNIC
     }
     Discharge_Details[0].insert_one(doc)
+
+# getting list of confirmed appointments to start the checkup
+def getconfirmbookings():
+    getdict = dbconnection("confirmedapt","-")
+    return getdict
+
+def makeupdate(mobile):
+    dbconnection("adding",mobile)
+    print("bl: Added in already created document \n")

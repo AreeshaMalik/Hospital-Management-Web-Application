@@ -9,14 +9,14 @@
 
 .footerHeading {
     font-size: 28px;
-    font-family: 'Lucida Sans Lucida Sans Regular Lucida Grande Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     padding-bottom: 2em;
 
 }
 
 .copyright {
     font-size: 15px;
-    font-family: 'Gill Sans Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     padding-left: 40%;
 }
 

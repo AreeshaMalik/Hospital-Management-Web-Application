@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="/static/confirmAppointment.css">
+
+{% if title %}
+    <title>{{title}}</title>
+{% else %}
+    <title>No title found</title>
+{% endif %}
+</head>
+<body>
+<div class="container">
+    <div class="heading">
+        Confirmed Appointments
+    </div>
+
+    
+    {% for key,value in appointments.items %}
+
+        <form action="{% url 'startCheckUp' %}" method="POST">
+            {% csrf_token %}
+
+           <div class="appointments">
+            <div class="row top">
+
+                <div class="col-lg-2">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            First Name
+                        </div>
+                        <div class="aptDet">
+
+                            <label for="FirstName">{{ value.FirstName }}</label>
+                            <input type = "hidden" name = "FirstName" value = "{{ value.FirstName }}"
+                                   id="FirstName"/>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Last Name
+                        </div>
+                        <div class="aptDet">
+
+                            <label for="LastName">{{ value.LastName }}</label>
+                            <input type = "hidden" name = "LastName" value = "{{ value.LastName }}"
+                                   id="LastName"/>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Sex
+                        </div>
+                        <div class="aptDet">
+
+                            <label for="sex">{{ value.sex }}</label>
+                            <input type = "hidden" name = "sex" value = "{{ value.sex }}"
+                                   id="sex"/>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Contact Number
+                        </div>
+                        <div class="aptDet">
+
+                            {{ value.mobile }}
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row top">
+
+                <div class="col-lg-4">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Email
+                        </div>
+                        <div class="aptDet">
+                           {{ value.email }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Apt Date
+                        </div>
+                        <div class="aptDet">
+
+                            <label for="Date">{{ value.Date }}</label>
+                            <input type = "hidden" name = "Date" value = "{{ value.Date }}"
+                                   id="Date"/>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Apt Time
+                        </div>
+                        <div class="aptDet">
+
+                            <label for="Time">{{ value.Time }}</label>
+                            <input type = "hidden" name = "Time" value = "{{ value.Time }}"
+                                   id="Time"/>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Doctor Name
+                        </div>
+                        <div class="aptDet">
+                            {{ value.doctor }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Department
+                        </div>
+                        <div class="aptDet">
+                            {{ value.department }}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+
+                <div class="col-lg-12 btnSubmit">
+                    <input type="submit" value="Start Checkup" name="Start Checkup"
+                           class="btn btn-primary" role="button">
+                </div>
+
+            </div>
+
+           </div>
+
+        </form>
+
+
+    {% endfor %}
+
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

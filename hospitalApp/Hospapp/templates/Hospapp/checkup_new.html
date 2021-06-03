@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkup</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"/>
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="/static/checkup_new.css">
+
+</head>
+<body>
+
+    <!-- Adds the design from Base.html -->
+    {% extends "Hospapp/base.html" %}
+
+    <!-- Webpage Design specific to this checkup -->
+    {% block start %}
+
+        <!--    Check up Header     -->
+        <div class="headerCheckUp">
+            Check Up
+        </div>
+
+        <!--   Patient Details     -->
+        <div class="appointments">
+            <div class="row top">
+
+                <div class="col-lg-4">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            First Name
+                        </div>
+                        <div class="aptDet">
+                            {% for x in FirstName %}
+                                {{x}}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Last Name
+                        </div>
+                        <div class="aptDet">
+                            {% for x in LastName %}
+                                {{x}}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Sex
+                        </div>
+                        <div class="aptDet">
+                            {% for x in sex %}
+                                {{x}}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row top">
+
+                <div class="col-lg-4">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Appointment Date
+                        </div>
+                        <div class="aptDet">
+                            {% for x in Date %}
+                                {{x}}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Appointment Time
+                        </div>
+                        <div class="aptDet">
+                            {% for x in Time %}
+                                {{x}}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <input type="submit" value="Get Medical History" name="Get Medical History"
+                           class="btn btn-primary btn-block" role="button">
+                </div>
+
+            </div>
+       </div>
+
+
+        <!--   Diagnosis and Prescription Block     -->
+
+        <div class="presDiagBlock">
+
+            <ul class="nav nav-tabs nav-fill">
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" aria-current="page" href="#diagnosis" style="font-size: 20px" >Diagnosis</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#pres" style="font-size: 20px" >Prescription</a>
+              </li>
+            </ul>
+
+
+            <div class="tab-content">
+
+                <div id="diagnosis" class="tab-pane fade in active">
+
+                      <form action="" method="post">
+                          {% csrf_token %}
+
+                          <div class="flex-container">
+
+                              <div class="row diagnosisBox">
+
+                                  <div class="col-lg-3">
+                                      <p class="diagnosisHeader">
+                                          Diagnosis
+                                      </p>
+                                  </div>
+
+                                  <div class="col-lg-9">
+
+                                      <div class="form-group">
+                                          <label for="diagnosis_box"></label>
+                                          <textarea class="form-control" rows="9" id="diagnosis_box"
+                                                    name="diagnosis_box" placeholder="Enter diagnosis here"></textarea>
+                                      </div>
+
+                                  </div>
+
+                              </div>
+                              <div class="row">
+
+                                  <div class="col-lg-12">
+                                      <input type="submit" value="Submit Diagnosis" name="Submit Diagnosis"
+                                            class="btn btn-secondary btn-block" role="button">
+                                  </div>
+
+                              </div>
+                          </div>
+
+                      </form>
+                </div>
+
+                <div id="pres" class="tab-pane fade in active">
+                     <form action="" method="post">
+                         {% csrf_token %}
+
+                         <div class="row">
+
+                             <div class="col-md-5">
+                                <label for="medicine" class="mr-sm-2 ml-sm-2">Medicine Name</label>
+                                <input type="text" class="form-control mb-2 mr-sm-2 ml-sm-1" placeholder="Enter Medicine"
+                                       id="medicine" name="medicine">
+                             </div>
+
+                             <div class="col-md-5">
+                                <label for="description" class="mr-sm-2">Description</label>
+                                <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Enter Description"
+                                       id="description" name="description">
+                             </div>
+
+                             <div class="col-md-2">
+                                <label for="dosage" class="mr-sm-2">Dosage</label>
+                                <input type="text" class="form-control mb-1 " placeholder="Enter Dosage"
+                                       id="dosage" name="dosage">
+                             </div>
+
+                         </div>
+
+                         <div>
+                              <input type="submit" value="Prescribe Medicine" name="Prescribe Medicine"
+                                    class="btn btn-block btn-secondary presBtn" role="button">
+                         </div>
+
+                     </form>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!--  Admit Patient -->
+        <div class="admitBlock">
+
+            <form method="POST" action="{% url 'startCheckUp' %}">
+                {% csrf_token %}
+
+                <div class="row">
+                    <div class="col-lg-2">
+                        <p class="admit">Admit Patient:</p>
+                    </div>
+                    <div class="col-lg-8 admit radioAdmit">
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="admitPatient" id="Yes">
+                          <label class="form-check-label" for="Yes">
+                            Yes
+                          </label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="admitPatient" id="No" checked>
+                          <label class="form-check-label" for="No">
+                            No
+                          </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <input type="submit" value="Confirm" name="Confirm"
+                        class="btn-lg btn-primary mt-2" role="button">
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+
+        <!--  End Check up  -->
+        <div>
+
+            <form method="POST" action="{% url 'doctor' %}">
+                {% csrf_token %}
+                <input type="submit" value="End Check up" name="End Check up"
+                        class="btn btn-primary btn-block" role="button">
+            </form>
+
+        </div>
+
+    {% endblock %}
+
+</body>
+</html>

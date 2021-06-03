@@ -8,7 +8,7 @@ urlpatterns = [
     path('logout', views.logout, name='logout'),
     path('doctor', views.doctorpage, name='doctor'),
     path('bookapt', views.BookAppointment, name='bookapt'),
-    path('checkUp', views.Checkup, name='checkUp'),
+    # path('checkUp', views.Checkup, name='checkUp'),
     path('register',views.registerPatient, name='register'),
     path('receptionist',views.receppage,name='receptionist'),
     path('confirmed', views.confirmAppointment, name='confirmAppointment'),
@@ -17,4 +17,6 @@ urlpatterns = [
     path('discharge', views.discharge_patient, name = 'discharge'),
     path('thePages', views.pages, name = 'thePages'),
     # path('delete',views.confirmBooking,name='delete'),
+    path('listAllAppointments', views.listAllAppointments, name='listAllAppointments'),
+    path('startCheckUp', views.start_checkup, name='startCheckUp'),
 ]

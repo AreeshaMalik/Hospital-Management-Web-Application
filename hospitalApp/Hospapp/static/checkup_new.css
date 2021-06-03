@@ -1,0 +1,87 @@
+.headerCheckUp {
+
+    font-size: 36px;
+    font-weight: 200px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    align-items: center;
+    padding-left: 45%;
+    margin-top: 30px;
+    border-bottom: 1px solid rgb(41, 41, 41);
+    margin-bottom: 25px;
+
+}
+
+.appointments {
+    border: 1px solid rgb(97, 68, 68);
+    background: rgb(245, 245, 245);
+    margin-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 5px;
+}
+
+.row.top {
+    border-bottom: 0.5px solid rgb(97, 68, 68);
+    margin-bottom: 5px;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.aptDet {
+    height: 40px;
+    font-size: 10px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    align-content: center;
+    background: rgb(245, 245, 245);
+}
+
+.aptDet.top {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.presDiagBlock {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-color: rgb(245, 245, 245);
+    height: 350px;
+}
+
+.diagnosisHeader {
+    margin-top: 110px;
+    margin-left: 80px;
+    font-size: 26px;
+    align-content: center;
+    font-weight: bold;
+}
+
+.presBtn {
+    margin-top: 188px;
+}
+
+.admitBlock {
+    height: 70px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(245, 245, 245);
+}
+
+.admit {
+    margin-top: 20px;
+    margin-left: 20px;
+    font-size: 20px;
+    align-content: center;
+    font-weight: bold;
+}
+
+.admit.radioAdmit {
+    font-weight: normal;
+    margin-left: 0px;
+}
+
+.admit.btnAdmit {
+
+}

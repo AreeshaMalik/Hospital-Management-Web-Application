@@ -17,9 +17,12 @@ class bookingForm(forms.Form):
     Date=forms.CharField(widget=forms.TextInput(attrs={'class':'input'}))
     Time=forms.CharField(widget=forms.TextInput(attrs={'class':'input'}))
 
-class Check_up(forms.Form):
-    fName=forms.CharField(widget=forms.TextInput(attrs={'class':'input'}))
-    lName=forms.CharField(widget=forms.TextInput(attrs={'class':'input'}))
+class startCheckUp(forms.Form):
+    FirstName = forms.CharField(widget=forms.TextInput(attrs={'class': 'input'}))
+    LastName = forms.CharField(widget=forms.TextInput(attrs={'class': 'input'}))
+    sex = forms.CharField(widget=forms.TextInput(attrs={'class': 'input'}))
+    Date = forms.CharField(widget=forms.TextInput(attrs={'class': 'input'}))
+    Time = forms.CharField(widget=forms.TextInput(attrs={'class': 'input'}))
 
 class Register(forms.Form):
     fName=forms.CharField(widget=forms.TextInput(attrs={'class':'input'}))

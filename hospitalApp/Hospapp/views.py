@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, request
 from .forms import *
 from django.template import loader
-from .BL.hmsbl import newPatient as np , newBooking as nb, findpatient, admitpatient as ap, getbookings, savebookings, deleteBooking, dischargepatient as dis
+from .BL.hmsbl import newPatient as np , newBooking as nb, findpatient, admitpatient as ap, getbookings, savebookings, deleteBooking, dischargepatient as dis, getconfirmbookings, makeupdate
 from .DB.hmsdb import find_document as fd
 # Create your views here.
 def homepage(request):
@@ -31,6 +31,7 @@ def login(request):
             if (username=="Doctor" and password=="Doc@123"):
                 return render(request,"Hospapp/doctor.html",{"form":form})
             elif(username=="Receptionist" and password=="Recep@456"):
+                makeupdate("03335718420")
                 return render(request,"Hospapp/receptionist.html",{"form":form})
             elif(username=="User" and password=="User@789"):
                 return render(request,"Hospapp/user.html",{"form":form})
@@ -103,23 +104,23 @@ def confirm_appointment(request):
     template = loader.get_template("Hospapp/receptionist.html")
     return HttpResponse(template.render({"form": form}, request))
 
-def Checkup(request):
-    print("\n in checkup\n")
-    if request.method == "POST":
-        form = Check_up(request.POST)
-        print("\n outside is valid\n")
-        if form.is_valid():
-            print("\n is valid \n")
-            fName = form.cleaned_data["fName"]
-            lName = form.cleaned_data["lName"]
-            print("\nname entered\n", fName, lName)
-        else:
-            print("form not valid")
-    else:
-        form = Check_up()
+# def Checkup(request):
+#     print("\n in checkup\n")
+#     if request.method == "POST":
+#         form = Check_up(request.POST)
+#         print("\n outside is valid\n")
+#         if form.is_valid():
+#             print("\n is valid \n")
+#             fName = form.cleaned_data["fName"]
+#             lName = form.cleaned_data["lName"]
+#             print("\nname entered\n", fName, lName)
+#         else:
+#             print("form not valid")
+#     else:
+#         form = Check_up()
 
-    template = loader.get_template("Hospapp/checkUp.html")
-    return HttpResponse(template.render({"form":form}, request))
+#     template = loader.get_template("Hospapp/checkUp.html")
+#     return HttpResponse(template.render({"form":form}, request))
 
 
 def registerPatient(request):
@@ -298,3 +299,71 @@ def pages(request):
     else:
         dis(CNIC)
         return render(request, 'Hospapp/admit_dis.html', {'mydoc': mydoc})
+
+
+# checkUp
+def listAllAppointments(request):
+    # Search the database for all the appointments
+    # data = {
+    #     'appointments': Appointment.objects.all(),
+    #     'title': 'Confirmed Appointments'
+    # }
+    data = getconfirmbookings()
+    print(type(data))
+    print(data)
+    return render(request, 'Hospapp/listAllAppointments.html', {'appointments': data,
+                                                               'title': 'Confirmed Appointments'})
+    # return render(request, 'HMS/listAllAppointments.html', data)
+
+def start_checkup(request):
+
+    # A session here is not necessary but exits only for
+    # learning purpose
+
+    if request.method == "POST":
+        form = startCheckUp(request.POST)
+
+        if form.is_valid():
+
+            patientFirstName = form.cleaned_data["FirstName"]
+            patientLastName = form.cleaned_data["LastName"]
+            patientSex = form.cleaned_data["sex"]
+            appointment_date = form.cleaned_data["Date"]
+            appointment_time = form.cleaned_data["Time"]
+
+            request.session['FirstName'] = patientFirstName
+            request.session['LastName'] = patientLastName
+            request.session['sex'] = patientSex
+            request.session['Date'] = appointment_date
+            request.session['Time'] = appointment_time
+
+        else:
+            print("Form not valid\n")
+    else:
+        form = startCheckUp()
+
+    # template = loader.get_template("HMS/checkup_new.html")
+    # return HttpResponse(template.render({"form": form}, request))
+
+    patientFirstName = request.session['FirstName']
+    patientLastName = request.session['LastName']
+    patientSex = request.session['sex']
+    appointment_date = request.session['Date']
+    appointment_time = request.session['Time']
+
+    print('\n')
+    print(patientFirstName)
+    print(patientLastName)
+    print(patientSex)
+    print(appointment_date)
+    print(appointment_time)
+    print('\n')
+
+    patient_details = dict()
+    patient_details['FirstName'] = patientFirstName
+    patient_details['LastName'] = patientLastName
+    patient_details['sex'] = patientSex
+    patient_details['Date'] = appointment_date
+    patient_details['Time'] = appointment_time
+
+    return render(request, 'Hospapp/checkup_new.html', patient_details)
