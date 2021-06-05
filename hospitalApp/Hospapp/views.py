@@ -1,3 +1,4 @@
+from abc import abstractproperty
 import django
 from django import template
 import random
@@ -6,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, request
 from .forms import *
 from django.template import loader
-from .BL.hmsbl import newPatient as np , newBooking as nb, findpatient, admitpatient as ap, getbookings, savebookings, deleteBooking, dischargepatient as dis, getconfirmbookings, makeupdate
+from .BL.hmsbl import newPatient as np , newBooking as nb, findpatient, admitpatient as ap, getbookings, savebookings, deleteBooking, dischargepatient as dis, getconfirmbookings, makeupdate, storecheckup
 from .DB.hmsdb import find_document as fd
 # Create your views here.
 def homepage(request):
@@ -31,7 +32,6 @@ def login(request):
             if (username=="Doctor" and password=="Doc@123"):
                 return render(request,"Hospapp/doctor.html",{"form":form})
             elif(username=="Receptionist" and password=="Recep@456"):
-                makeupdate("03335718420")
                 return render(request,"Hospapp/receptionist.html",{"form":form})
             elif(username=="User" and password=="User@789"):
                 return render(request,"Hospapp/user.html",{"form":form})
@@ -371,6 +371,7 @@ def start_checkup(request):
     patient_details['Time'] = appointment_time
     patient_details['CNIC'] = patientCNIC
 
+    storecheckup(patientFirstName,patientLastName,patientSex,patientCNIC,appointment_date,appointment_time,"-","-")
 
     return render(request, 'Hospapp/checkup_new.html', patient_details)
 

@@ -107,3 +107,14 @@ def find_document(CNIC):
         for key, value in mydoc.next().items():
             newdoc[key] = value
         return newdoc
+
+
+def saveCheckup(FirstName,LastName,sex,CNIC,Date,Time):
+    client = pymongo.MongoClient("mongodb+srv://areesha:Areesha123@se.0nmlc.mongodb.net/HMS?retryWrites=true&w=majority")
+    db = client['HMS']
+
+    checkup = db["CheckUp"]
+    checklist = checkup.count()
+    samplecheckup = list()
+
+    
