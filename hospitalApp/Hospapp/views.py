@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, request
 from .forms import *
 from django.template import loader
-from .BL.hmsbl import newPatient as np , newBooking as nb, findpatient, admitpatient as ap, getbookings, savebookings, deleteBooking, dischargepatient as dis, getconfirmbookings, makeupdate, storecheckup
+from .BL.hmsbl import fetchprescription, newPatient as np , newBooking as nb, findpatient, admitpatient as ap, getbookings, savebookings, deleteBooking, dischargepatient as dis, getconfirmbookings, storecheckup, diagnosis,prescription
 from .DB.hmsdb import find_document as fd
 # Create your views here.
 def homepage(request):
@@ -35,6 +35,8 @@ def login(request):
                 return render(request,"Hospapp/receptionist.html",{"form":form})
             elif(username=="User" and password=="User@789"):
                 return render(request,"Hospapp/user.html",{"form":form})
+            elif username == "Pharmacist" and password == "Pharma@101":
+                return render(request, 'Hospapp/pharma.html', {"form": form})
     else:
         form = loginForm()
     template=loader.get_template("Hospapp/login.html")
@@ -371,9 +373,9 @@ def start_checkup(request):
     patient_details['Time'] = appointment_time
     patient_details['CNIC'] = patientCNIC
 
-    storecheckup(patientFirstName,patientLastName,patientSex,patientCNIC,appointment_date,appointment_time,"-","-")
+    storecheckup(patientFirstName,patientLastName,patientSex,patientCNIC,appointment_date,appointment_time,"-","-","-","-")
 
-    return render(request, 'Hospapp/checkup_new.html', patient_details)
+    return render(request, 'Hospapp/checkup_new.html', patient_details) 
 
 
 def Diagnose(request):
@@ -384,7 +386,10 @@ def Diagnose(request):
         # print("\n diagnosis is valid\n")
         if form.is_valid():
             # print("\n is valid\n")
+            CNIC = request.session['CNIC']
+            date = request.session['Date']
             diagnosis_box = form.cleaned_data["diagnosis_box"]
+            diagnosis(CNIC,date,diagnosis_box)
             print("\ndiagnosis entered\n", diagnosis_box)
         else:
             print("form not valid")
@@ -394,7 +399,7 @@ def Diagnose(request):
     template = loader.get_template("Hospapp/checkup_new.html")
     return HttpResponse(template.render({"form": form}, request))
 
-
+# Getting prescription added on the page here
 def Prescribe_Medicine(request):
     # print("\n in Medicine\n")
     if request.method == "POST":
@@ -403,10 +408,13 @@ def Prescribe_Medicine(request):
         # print("\n prescribe medicine\n")
         if form.is_valid():
             # print("\n is valid\n")
+            CNIC = request.session['CNIC']
+            date = request.session['Date']
             medicine = form.cleaned_data["medicine"]
             description = form.cleaned_data["description"]
             dosage = form.cleaned_data["dosage"]
             print("\nprescription entered\n", medicine, dosage, description)
+            prescription(CNIC,date,medicine,dosage,description)
         else:
             print("form not valid")
     else:
@@ -414,3 +422,77 @@ def Prescribe_Medicine(request):
 
     template = loader.get_template("Hospapp/checkup_new.html")
     return HttpResponse(template.render({"form": form}, request))
+
+
+def getPrescription(request):
+    medicine = '-'
+    quantity = '-'
+    description = '-'
+    diagnosis = '-'
+    
+    CNIC = '-'
+    Date = '-'
+
+    getdata = dict()
+    
+    if request.method == "POST":
+        form = getPres(request.POST)
+        if form.is_valid():
+
+            CNIC = form.cleaned_data["CNIC"]
+            Date = form.cleaned_data["Date"]
+            
+            getdata = fetchprescription(CNIC,Date)
+            print("Fetching prescription data: \n")
+            print(getdata)
+            print(type(getdata))
+            if 'Diagnosis' in getdata.keys():
+                diagnosis = getdata.get('Diagnosis')
+            
+            if 'Description' in getdata.keys():
+                description = getdata.get('Description')
+                
+            if 'Medicine' in getdata.keys():
+                # print("True Medicine")
+                medicine = getdata.get('Medicine')
+            
+            if 'Dosage' in getdata.keys():
+                # print("True Dosage")
+                quantity = getdata.get('Dosage')
+
+
+        else:
+            print("Form not valid\n")
+    else:
+        form = getPres()
+
+    print(CNIC)
+    print(Date)
+    # Extract data from Prescription table
+    # where CNIC and date matches
+    # Add medicine and quantity to respective
+    # variable.
+    
+    
+    # for key, values in getdata.items():
+    #     print(key, values)
+        
+
+    # These variables will be displayed
+    # on our page
+    pres = dict()
+    # if getdict == 0:
+    pres['medicine'] = medicine
+    pres['quantity'] = quantity
+    pres['description'] = description
+    pres['diagnosis'] = diagnosis
+
+
+    # else:
+    #     pres['medicine'] = getdict['Medicine']
+    #     pres['quantity'] = getdict['Dosage']
+    # pres['description'] = getdict['description']
+    # pres['diagnosis'] = getdict['diagnosis']
+
+
+    return render(request, 'Hospapp/get_prescription.html', pres)

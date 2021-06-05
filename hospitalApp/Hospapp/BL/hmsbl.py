@@ -1,4 +1,4 @@
-from ..DB.hmsdb import dbconnection
+from ..DB.hmsdb import dbconnection, dbdiagnosis, dbpres, dbgetpres
 
 def newPatient(fName,lName,sex,CNIC,mobile,email,address):
     recepDetails = dbconnection("Receptionist","-")
@@ -107,8 +107,34 @@ def getconfirmbookings():
     getdict = dbconnection("confirmedapt","-")
     return getdict
 
-def makeupdate(mobile):
-    dbconnection("adding",mobile)
-    print("bl: Added in already created document \n")
 
-# def addcheckup(firstname,lastname,sex,)
+def storecheckup(firstname,lastname,sex,CNIC,date,time,diag,med,dos,des):
+    checkupDetails = dbconnection("storecheckup","-")
+
+    document = { 
+        "id": str(checkupDetails[1]), 
+        "FirstName": firstname,
+        "LastName": lastname,
+        "sex": sex,
+        "CNIC": CNIC,
+        "Time": time,
+        "Date": date,
+        "Diagnosis": diag,
+        "Medicine": med,
+        "Dosage": dos,
+        "Description": des
+    }
+
+    checkupDetails[0].insert_one(document)
+
+def diagnosis(CNIC,date,diag):
+    dbdiagnosis(CNIC,date,diag)
+    print ("sent in db \n")
+
+def prescription(CNIC,date,med,dos,des):
+    dbpres(CNIC,date,med,dos,des)
+    print ("sent in db \n")
+
+def fetchprescription(CNIC,date):
+    getdict = dbgetpres(CNIC,date)
+    return getdict

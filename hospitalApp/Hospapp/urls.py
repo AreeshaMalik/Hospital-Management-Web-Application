@@ -21,4 +21,5 @@ urlpatterns = [
     path('startCheckUp', views.start_checkup, name='startCheckUp'),
     path('Diagnosis', views.Diagnose, name='Diagnosis'),
     path('Prescribe_Medicine', views.Prescribe_Medicine, name='Prescription'),
+    path('getPrescription', views.getPrescription, name='getPrescription'),
 ]

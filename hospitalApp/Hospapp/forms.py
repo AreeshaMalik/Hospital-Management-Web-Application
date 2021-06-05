@@ -61,3 +61,7 @@ class Discharge(forms.Form):
     #fName = forms.CharField(widget=forms.TextInput(attrs={'class': 'input'}))
     #lName = forms.CharField(widget=forms.TextInput(attrs={'class': 'input'}))
     CNIC = forms.CharField(widget=forms.TextInput(attrs={'class': 'input'}))
+
+class getPres(forms.Form):
+    CNIC = forms.CharField(widget=forms.TextInput(attrs={'class': 'input'}))
+    Date = forms.CharField(widget=forms.TextInput(attrs={'class': 'input'}))

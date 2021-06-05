@@ -1,0 +1,60 @@
+body {
+    background: rgb(214, 214, 214);
+}
+
+.presBlock {
+    position: relative;
+    height: 670px;
+    width: 70%;
+    background: rgb(245,245,245);
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 50px;
+    border: 1px solid black;
+}
+
+.presAdmit {
+    height: 50px;
+    font-size: 36px;
+    font-weight: 200px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    align-items: center;
+    padding-left: 35%;
+    padding-top: 0.5%;
+    margin-top: 30px;
+    border-bottom: 1px solid rgb(41, 41, 41);
+    margin-bottom: 25px;
+}
+
+.labelPres {
+    /* margin-left: 70px; */
+    margin-top: 5px;
+    font-size: 19px;
+    align-content: center;
+    font-weight: bold;
+}
+
+.headingMed {
+    font-size: 19px;
+    font-weight: bold;
+    text-decoration: underline;
+    border-top: 1px black solid;
+    padding-top: 20px;
+}
+
+.medHead {
+    padding-left:300px; 
+}
+
+.qtyHead {
+    padding-left:100px;
+}
+
+.medPres {
+    height: 80px;
+    border-bottom: 1px solid black;
+    margin-top: 10px;
+    font-size: 19px;
+    padding-top: 50px;
+}
+

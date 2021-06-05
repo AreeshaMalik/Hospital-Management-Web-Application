@@ -17,6 +17,8 @@ def dbconnection(actor,check):
     Confirmedlist = Confirmed.count()
     Discharge = db["Discharge Patients"]
     Dischargelist = Discharge.count()
+    checkup = db["CheckUp"]
+    checklist = checkup.count()
 
 
     samplelist = list()
@@ -24,6 +26,7 @@ def dbconnection(actor,check):
     sampleadmit = list()
     sampleconfirm = list()
     sample_discharge = list()
+    samplecheckup = list()
 
     updt = db['CheckUpdate']
     uplist = updt.count()
@@ -87,9 +90,11 @@ def dbconnection(actor,check):
             a = a + 1
         return getdict
     
-    elif actor == "adding":
-        updt.update({"name" :"Areesha" },{"$set":{"mobile":check}})
-        print("db: updated \n")
+    elif actor == "storecheckup":
+        samplecheckup.append(checkup)
+        samplecheckup.append(checklist)
+
+        return samplecheckup
 
     elif (actor == "deleteall"):
         Register.delete_many()
@@ -109,12 +114,43 @@ def find_document(CNIC):
         return newdoc
 
 
-def saveCheckup(FirstName,LastName,sex,CNIC,Date,Time):
+def dbdiagnosis(CNIC,Date,diag):
     client = pymongo.MongoClient("mongodb+srv://areesha:Areesha123@se.0nmlc.mongodb.net/HMS?retryWrites=true&w=majority")
     db = client['HMS']
 
     checkup = db["CheckUp"]
     checklist = checkup.count()
-    samplecheckup = list()
 
+    for data in checkup.find({"Date": Date}):
+        # print("FOund\n",data)
+        checkup.update({"CNIC" :CNIC },{"$set":{"Diagnosis":diag}})
+        print("diagnosis: updated \n")
+
+def dbpres(CNIC,Date,med,dos,des):
+    client = pymongo.MongoClient("mongodb+srv://areesha:Areesha123@se.0nmlc.mongodb.net/HMS?retryWrites=true&w=majority")
+    db = client['HMS']
+
+    checkup = db["CheckUp"]
+    checklist = checkup.count()
+
+    for data in checkup.find({"Date": Date}):
+        # print("FOund\n",data)
+        checkup.update({"CNIC" :CNIC },{"$set":{"Medicine":med}})
+        checkup.update({"CNIC" :CNIC },{"$set":{"Dosage":dos}})
+        checkup.update({"CNIC" :CNIC },{"$set":{"Description":des}})
+        print("prescription: updated \n")
     
+def dbgetpres(CNIC,date):
+    client = pymongo.MongoClient("mongodb+srv://areesha:Areesha123@se.0nmlc.mongodb.net/HMS?retryWrites=true&w=majority")
+    db = client['HMS']
+
+    checkup = db["CheckUp"]
+    checklist = checkup.count()
+
+    for data in checkup.find({"Date": date}):
+        # print("FOund\n",data)
+        for cnic in data:
+            # print("CNIC in db:",cnic)
+            if CNIC == data[cnic]:
+                print("Match:",data[cnic])
+                return data
