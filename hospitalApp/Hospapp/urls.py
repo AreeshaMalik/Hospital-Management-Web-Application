@@ -22,4 +22,5 @@ urlpatterns = [
     path('Diagnosis', views.Diagnose, name='Diagnosis'),
     path('Prescribe_Medicine', views.Prescribe_Medicine, name='Prescription'),
     path('getPrescription', views.getPrescription, name='getPrescription'),
+    path('getReport', views.get_report, name='getReport'),
 ]

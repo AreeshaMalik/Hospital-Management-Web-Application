@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Get Prescription</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"/>
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="/static/get_report.css">
+</head>
+<body>
+
+    <div class="presBlock">
+
+        <div class="presReport">
+            Medical Record
+        </div>
+
+        <!--  Search Patient with CNIC -->
+        <form action="{% url 'getReport' %}" method="POST">
+            {% csrf_token %}
+
+            <div class="row mb-3">
+                <label for="CNIC" class="form-label labelReport">Add your CNIC</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="CNIC" name="CNIC">
+                </div>
+
+                <div class="sol-sm-4">
+                    <input type="submit" value="Search" name="Search"
+                        class="btn btn-primary" role="button">
+                </div>
+            </div>
+        </form>
+        {% for key,value in appointments.items %}
+        <div class="appointments">
+            <div class="row top">
+
+                <div class="col-lg-2">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            First Name
+                        </div>
+                        <div class="aptDet">
+                            {{ value.patientFirstName }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Last Name
+                        </div>
+                        <div class="aptDet">
+                            {{ value.patientLastName }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            CNIC
+                        </div>
+                        <div class="aptDet">
+                            {{ value.patientCNIC }}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row top">
+
+                <div class="col-lg-3">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Appointment Date
+                        </div>
+                        <div class="aptDet">
+                            {{ value.admissionDate }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="flex-container">
+                        <div class="aptDet top">
+                            Appointment Time
+                        </div>
+                        <div class="aptDet">
+                            {{ value.admissionTime }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+    {% endfor %}
+    </div>
+
+</body>
+</html>

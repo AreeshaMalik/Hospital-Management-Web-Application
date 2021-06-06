@@ -138,3 +138,7 @@ def prescription(CNIC,date,med,dos,des):
 def fetchprescription(CNIC,date):
     getdict = dbgetpres(CNIC,date)
     return getdict
+
+def fetchreport(CNIC):
+    getdict = dbconnection("report",CNIC)
+    return getdict

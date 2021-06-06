@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, request
 from .forms import *
 from django.template import loader
-from .BL.hmsbl import fetchprescription, newPatient as np , newBooking as nb, findpatient, admitpatient as ap, getbookings, savebookings, deleteBooking, dischargepatient as dis, getconfirmbookings, storecheckup, diagnosis,prescription
+from .BL.hmsbl import fetchprescription, fetchreport, newPatient as np , newBooking as nb, findpatient, admitpatient as ap, getbookings, savebookings, deleteBooking, dischargepatient as dis, getconfirmbookings, storecheckup, diagnosis,prescription
 from .DB.hmsdb import find_document as fd
 # Create your views here.
 def homepage(request):
@@ -453,11 +453,9 @@ def getPrescription(request):
                 description = getdata.get('Description')
                 
             if 'Medicine' in getdata.keys():
-                # print("True Medicine")
                 medicine = getdata.get('Medicine')
             
             if 'Dosage' in getdata.keys():
-                # print("True Dosage")
                 quantity = getdata.get('Dosage')
 
 
@@ -496,3 +494,77 @@ def getPrescription(request):
 
 
     return render(request, 'Hospapp/get_prescription.html', pres)
+
+def get_report(request):
+    # date = '-'
+    # description = '-'
+    # CNIC = '-'
+    # Variables initialized with none
+    patientFirstName = "-"
+    patientLastName = "-"
+    patientSex = "-"
+    patientCNIC = "-"
+    aptDate = "-"
+    aptTime = "-"
+    diagnosis = "-"
+    medicine = "-"
+    dosage = "-"
+    description = "-"
+
+    if request.method == "POST":
+        form = getReport(request.POST)
+        if form.is_valid():
+            patientCNIC = form.cleaned_data["CNIC"]
+
+            # Extract checkup details from
+            # Appointment table where CNIC matches
+            # Add Description and date to respective
+            # variable.
+    
+            getdata = fetchreport(patientCNIC)
+            print(getdata)
+            if 'FirstName' in getdata.keys():
+                patientFirstName = getdata.get('FirstName')
+            if 'LastName' in getdata.keys():
+                patientLastName = getdata.get('LastName')   
+            if 'sex' in getdata.keys():
+                patientSex = getdata.get('sex')        
+            if 'CNIC' in getdata.keys():
+                patientCNIC = getdata.get('CNIC')
+            if 'Time' in getdata.keys():
+                aptTime = getdata.get('Time')
+            if 'Date' in getdata.keys():
+                aptDate = getdata.get('Date')
+            if 'Diagnosis' in getdata.keys():
+                diagnosis = getdata.get('Diagnosis')
+            if 'Medicine' in getdata.keys():
+                medicine = getdata.get('Medicine')
+            if 'Dosage' in getdata.keys():
+                dosage = getdata.get('Dosage')
+            if 'Description' in getdata.keys():
+                description = getdata.get('Description')
+
+        else:
+            print("Form not valid\n")
+    else:
+        form = getReport()
+
+    # These variables will be displayed
+    # on our page
+    patient_details = dict()
+    patient_details['patientFirstName'] = patientFirstName
+    patient_details['patientLastName'] = patientLastName
+    patient_details['patientSex'] = patientSex
+    patient_details['patientCNIC'] = patientCNIC
+    patient_details['admissionDate'] = aptDate
+    patient_details['admissionTime'] = aptTime
+    patient_details['description'] = description
+    patient_details['diagnosis'] = diagnosis
+    patient_details['medicine'] = medicine
+    patient_details['dosage'] = dosage
+
+    
+    # report['date'] = date
+    # report['description'] = description
+
+    return render(request, 'Hospapp/get_report.html', patient_details)

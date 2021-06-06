@@ -1,0 +1,66 @@
+body {
+    background: rgb(214, 214, 214);
+}
+
+.presBlock {
+    position: relative;
+    height: 670px;
+    width: 70%;
+    background: rgb(245,245,245);
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 50px;
+    border: 1px solid black;
+}
+
+.presReport {
+    height: 50px;
+    font-size: 36px;
+    font-weight: 200px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    align-items: center;
+    padding-left: 35%;
+    padding-top: 0.5%;
+    margin-top: 30px;
+    border-bottom: 1px solid rgb(41, 41, 41);
+    margin-bottom: 25px;
+}
+
+.labelReport {
+    margin-left: 70px;
+    margin-top: 5px;
+    font-size: 19px;
+    align-content: center;
+    font-weight: bold;
+}
+
+.report {
+    height: 80px;
+    border-bottom: 1px solid rgb(41, 41, 41);
+    margin-top: 10px;
+    width: 96%;
+    margin-left: 15px;
+}
+
+.dateLabel {
+    padding-left: 20px;
+    font-size: 21px;
+    font-weight: 200px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+.date {
+    font-size: 19px;
+    font-weight: 200px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.desc {
+    font-size: 17px;
+    font-weight: 100px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 30px;
+    padding-right: 10px;
+    margin-top: 50px;
+    padding-bottom: 50px;
+}

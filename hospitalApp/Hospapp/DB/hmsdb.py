@@ -95,6 +95,12 @@ def dbconnection(actor,check):
         samplecheckup.append(checklist)
 
         return samplecheckup
+    
+    elif actor == "report":
+        getdict = dict()
+        for data in checkup.find({"CNIC": check}):
+            return data
+        # return getdict
 
     elif (actor == "deleteall"):
         Register.delete_many()
